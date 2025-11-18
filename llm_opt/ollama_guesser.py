@@ -176,7 +176,7 @@ class OllamaDspy(Guesser):
 
         assert max_n_guesses == 1, "Can only give one guess"
         result = model(question)
-        return {"guess": result.guess, "confidence": result.confidence, "evidence": result.context}
+        return [{"guess": result.guess, "confidence": result.confidence, "evidence": result.context}]
             
             
     def set_ollama_model(self, model):
@@ -185,7 +185,7 @@ class OllamaDspy(Guesser):
 
     def load(self):
         path = self.filename
-        self._optimized.load("%s.json" % path)        
+        self._model.load("%s.json" % path)        
 
     def save(self):
         path = self.filename

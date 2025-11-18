@@ -166,7 +166,6 @@ class LoRABertBuzzer(Buzzer):
             example = {}
 
             for guess in guesses:
-                print("!*!", guesser_id, guess)
                 if rough_compare(guess['guess'], answer):
                     correct = 1
                 else:

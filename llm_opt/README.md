@@ -36,7 +36,7 @@ The quality of this element matters a lot for the RAG step, so you may want to
 spend some time tuning it if you didn't do it for the previous homework.
 Recall is much more important than precision.
 
-	.venv/bin/python3 guesser.py --guesser_type=Tfidf --question_source=gzjson --questions=data/qanta.guesstrain.json.gz --logging_file=guesser.log
+	.venv/bin/python3 guesser.py --guesser_type=Tfidf --question_source=gzjson --questions=../data/qanta.guesstrain.json.gz --logging_file=guesser.log
 
 The first priority is to get it running and sending requests to Ollama.  The
 actual optimization process can take a while (it depends on your hardware), so
@@ -64,12 +64,11 @@ After understanding the code, you can get down to coding:
   without this change but will be very slow*.  The first time you run the code will take a little bit longer because it needs
 to download the DistillBERT model.
 
-      ./venv/bin/python3 -i lorabert_buzzer.py --questions=../data/qanta.buzztrain.json.gz --secondary_questions=../data/qanta.buzzdev.json.gz --buzzer_guessers=Tfidf --load=True --buzzer_type='lorabert' --limit=100./venv/bin/python3 -i lorabert_buzzer.py --questions=../data/qanta.buzztrain.json.gz --secondary_questions=../data/qanta.buzzdev.json.gz --buzzer_guessers=Tfidf --load=True --buzzer_type='lorabert' --limit=100             
+      ./venv/bin/python3 lorabert_buzzer.py --questions=../data/qanta.buzztrain.json.gz --secondary_questions=../data/qanta.buzzdev.json.gz --buzzer_guessers=Tfidf --load=True --buzzer_type='lorabert' --limit=100
       config.json: 100%|████████████████████████████████████████████| 483/483 [00:00<00:00, 7.18MB/s]
       model.safetensors: 100%|████████████████████████████████████| 268M/268M [00:04<00:00, 64.1MB/s]
 
 This will go faster afterward.
-
 
 * You will need to define the parameter matrices for the LoRA layer in the
   `LoRALayer` class `__init__` function and then use them to compute a delta
@@ -94,7 +93,14 @@ This will go faster afterward.
   requirements of the homework (but loss should go down and accuracy should
   improve with more data).
 
-* The command line above uses the default tf-idf guesser, but you'll want to replace it with the DSPy-based guesser you've optimized.
+* The command line above uses the default tf-idf guesser, but you'll want to
+  replace it with the DSPy-based guesser you've optimized.  E.g., something like.
+
+           ./venv/bin/python3 lorabert_buzzer.py --questions=../data/qanta.buzztrain.json.gz --secondary_questions=../data/qanta.buzzdev.json.gz --buzzer_guessers=Tfidf --load=True --buzzer_type='lorabert' --limit=100
+
+  This loads the save DSPy model from models/guesser.json ... if you saved it
+  to a different file, you'll need to change the `ollama_guesser_filename`
+  flag.
 
 Good Enough Solution
 =====
