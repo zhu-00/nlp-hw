@@ -120,6 +120,7 @@ To have a good enough solution, you must both
 
 What to Submit
 =====
+We create two assignments, guesser and buzzer, for this HW. Please submit following files to both (for our grading convenience!). For guesser, the leaderboard will show precision and recall. The buzzer's leaderboard will show expected win, best_score, buzz ratio, buzz position. These will help you with 
 
 * Your `analysis.pdf` file (if you don't go beyond the "Good
 Enough", you must at least establish your baseline values).
